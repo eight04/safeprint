@@ -55,6 +55,10 @@ Dev-dependencies
 Changelog
 ---------
 
+* 0.1.1 (Apr 15, 2016)
+
+	- Fix builtins bug.
+
 * 0.1.0 (Apr 15, 2016)
 
 	- Initial release.
