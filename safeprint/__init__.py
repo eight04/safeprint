@@ -2,7 +2,7 @@
 
 """A printer suppressing UnicodeEncodeError."""
 
-import os, re, sys, win_unicode_console.streams
+import os, re, sys, win_unicode_console.streams, builtins
 
 from .version import __version__
 
@@ -22,7 +22,7 @@ class BasePrinter:
 		text = sep.join(map(str, objects))
 		
 		if file is not sys.stdout:
-			__builtins__.print(text, end=end, file=file, flush=flush)
+			builtins.print(text, end=end, file=file, flush=flush)
 		else:
 			self.imp_print(text, end=end)
 			
@@ -31,7 +31,7 @@ class BasePrinter:
 			
 	def imp_print(self, text, end):
 		"""Implement"""
-		__builtins__.print(text, end=end)
+		builtins.print(text, end=end)
 		
 	def add_listener(self, callback):
 		"""Register callback"""
@@ -56,14 +56,14 @@ class TryPrinter(BasePrinter):
 	def imp_print(self, text, end):
 		"""Catch UnicodeEncodeError"""
 		try:
-			__builtins__.print(text, end=end)
+			builtins.print(text, end=end)
 		except UnicodeEncodeError:
 			for i in text:
 				try:
-					__builtins__.print(i, end="")
+					builtins.print(i, end="")
 				except UnicodeEncodeError:
-					__builtins__.print("?", end="")
-			__builtins__.print("", end=end)
+					builtins.print("?", end="")
+			builtins.print("", end=end)
 			
 class WinUnicodePrinter(BasePrinter):
 	def imp_print(self, text, end):
@@ -71,20 +71,3 @@ class WinUnicodePrinter(BasePrinter):
 		print(text, end=end, file=win_unicode_console.streams.stdout_text_transcoded)
 		
 print = Printer().print
-
-if __name__ == "__main__":
-	import timeit, functools
-	
-	texts = ["Hello World!", "你好世界！", "ハローワールド", "हैलो वर्ल्ड"]
-	
-	def do_print(printer):
-		printer.print(*texts)
-		
-	results = []
-	for printer in (EchoPrinter(), TryPrinter(), WinUnicodePrinter()):
-		test = functools.partial(do_print, printer)
-
-		result = timeit.timeit("test()", number=100, setup="from __main__ import test")
-		results.append(result)
-		
-	print(results)

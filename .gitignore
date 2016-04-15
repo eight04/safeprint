@@ -10,5 +10,3 @@ download/
 build/
 dist/
 *.egg-info/
-
-test*
