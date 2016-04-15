@@ -49,10 +49,13 @@ Dev-dependencies
 * bumpr
 * wheel
 * docutils
+* twine
+* setuptools
 
 Changelog
 ---------
 
 * 0.1.0 (Apr 15, 2016)
 
-	* First release.
+	- Initial release.
+	
