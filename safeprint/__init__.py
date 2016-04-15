@@ -6,8 +6,6 @@ import os, re, sys, win_unicode_console.streams
 
 from .version import __version__
 
-__version__ = "0.1.0"
-
 def Printer():
 	if sys.platform == "win32":
 		return WinUnicodePrinter()
