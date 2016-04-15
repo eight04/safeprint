@@ -7,3 +7,4 @@ publish =
 	python setup.py sdist bdist_wheel
 	twine upload dist/*{version}*
 	git push --follow-tags
+	pip install -e .
