@@ -8,6 +8,3 @@ publish =
 	twine upload dist/*{version}*
 	git push --follow-tags
 	pip install -e .
-
-[prepare]
-commit = false
