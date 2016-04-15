@@ -1,0 +1,14 @@
+*.dat
+*.ini
+*.log
+*.pyc
+*.bak
+.doit*
+
+__pycache__/
+download/
+build/
+dist/
+*.egg-info/
+
+test*
