@@ -68,6 +68,6 @@ class TryPrinter(BasePrinter):
 class WinUnicodePrinter(BasePrinter):
 	def imp_print(self, text, end):
 		"""Use win_unicode_console"""
-		print(text, end=end, file=win_unicode_console.streams.stdout_text_transcoded)
+		builtins.print(text, end=end, file=win_unicode_console.streams.stdout_text_transcoded)
 		
 print = Printer().print
