@@ -11,24 +11,29 @@ https://github.com/pypa/sampleproject
 from setuptools import setup, find_packages
 from os import path
 
+import re
+
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+def read(file):
+	with open(path.join(here, file), encoding='utf-8') as f:
+		content = f.read()
+	return content
 	
-settings = {
-	"name": "safeprint",
-	"version": __import__("safeprint.version").__version__,
-	"description": 'A printer suppressing UnicodeEncodeError',
-	# Get the long description from the relevant file
-	"long_description": long_description,
-	"url": 'https://github.com/eight04/safeprint',
-	"author": 'eight',
-	"author_email": 'eight04@gmail.com',
-	"license": 'MIT',
+def find_version(file):
+	return re.search(r"__version__ = (\S*)", read(file)).group(1).strip("\"'")
+	
+setup(
+	name = "safeprint",
+	version = find_version("safeprint/__init__.py"),
+	description = 'A printer suppressing UnicodeEncodeError',
+	long_description = read("README.rst"),
+	url = 'https://github.com/eight04/safeprint',
+	author = 'eight',
+	author_email = 'eight04@gmail.com',
+	license = 'MIT',
 	# See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-	"classifiers": [
+	classifiers = [
 		'Development Status :: 5 - Production/Stable',
 		"Environment :: Console",
 		"Environment :: Win32 (MS Windows)",
@@ -39,15 +44,14 @@ settings = {
 		"Programming Language :: Python :: 3.5",
 		"Topic :: Terminals"
 	],
-	"keywords": 'windows cmd unicode print',
-	"packages": ["safeprint"],
-	"install_requires": ["win-unicode-console"],
-	"entry_points": {
+	keywords = 'windows cmd unicode print',
+	packages = find_packages(),
+	install_requires = [
+		"win-unicode-console>=0.4"
+	],
+	entry_points = {
 		"console_scripts": [
 			
 		]
 	}
-}
-
-if __name__ == "__main__":
-	setup(**settings)
+)

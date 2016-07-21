@@ -4,7 +4,7 @@
 
 import os, re, sys, win_unicode_console.streams, builtins
 
-from .version import __version__
+__version__ = "0.1.1"
 
 def Printer():
 	if (sys.platform == "win32"
