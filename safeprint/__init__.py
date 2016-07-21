@@ -8,7 +8,9 @@ from .version import __version__
 
 def Printer():
 	if sys.platform == "win32":
-		return WinUnicodePrinter()
+		if win_unicode_console.streams.STDOUT.should_be_fixed():
+			return WinUnicodePrinter()
+		return EchoPrinter()
 	else:
 		return BasePrinter()
 
