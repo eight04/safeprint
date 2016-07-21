@@ -7,10 +7,10 @@ import os, re, sys, win_unicode_console.streams, builtins
 from .version import __version__
 
 def Printer():
-	if sys.platform == "win32":
-		if win_unicode_console.streams.STDOUT.should_be_fixed():
-			return WinUnicodePrinter()
-		return EchoPrinter()
+	if (sys.platform == "win32"
+			and (not hasattr(win_unicode_console.streams, "STDOUT")
+			or win_unicode_console.streams.STDOUT.should_be_fixed())):
+		return WinUnicodePrinter()
 	else:
 		return BasePrinter()
 
