@@ -63,6 +63,10 @@ Performance note
 Changelog
 ---------
 
+* 0.1.4 (Dec 31, 2016)
+
+  - Make win-unicode-console optional with Python 3.6.
+
 * 0.1.2 (Jul 21, 2016)
 
   - Compatible with win-unicode-console 0.5
