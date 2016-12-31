@@ -2,7 +2,7 @@
 
 """A printer suppressing UnicodeEncodeError."""
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 import os, re, sys, builtins
 
