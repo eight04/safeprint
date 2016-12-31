@@ -2,19 +2,33 @@
 
 """A printer suppressing UnicodeEncodeError."""
 
-import os, re, sys, win_unicode_console.streams, builtins
-
 __version__ = "0.1.3"
+
+import os, re, sys, builtins
+
+try:
+	import win_unicode_console.streams
+	WIN_UNICODE_CONSOLE = True
+except ImportError:
+	WIN_UNICODE_CONSOLE = False
+	
+def wuc_should_be_fixed():
+	stdout = getattr(win_unicode_console.streams, "STDOUT", None)
+	return not stdout or stdout.should_be_fixed()
 
 def Printer():
 	if sys.version_info >= (3, 6, 0):
-		return NativePrinter()
+		return BasePrinter()
 		
-	if (sys.platform == "win32"
-			and (not hasattr(win_unicode_console.streams, "STDOUT")
-			or win_unicode_console.streams.STDOUT.should_be_fixed())):
+	if sys.platform != "win32":
+		return BasePrinter()
+		
+	if not WIN_UNICODE_CONSOLE:
+		return EchoPrinter
+		
+	if wuc_should_be_fixed():
 		return WinUnicodePrinter()
-
+		
 	return BasePrinter()
 
 class BasePrinter:
@@ -74,9 +88,5 @@ class WinUnicodePrinter(BasePrinter):
 	def imp_print(self, text, end):
 		"""Use win_unicode_console"""
 		builtins.print(text, end=end, file=win_unicode_console.streams.stdout_text_transcoded)
-		
-class NativePrinter(BasePrinter):
-	def imp_print(self, text, end):
-		builtins.print(text, end=end)
 		
 print = Printer().print
