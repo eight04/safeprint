@@ -41,7 +41,7 @@ Hook callback:
 Dependencies
 ------------
 
-* win-unicode-console
+* win-unicode-console - required if python version < 3.6.
 
 Dev-dependencies
 ----------------
@@ -51,6 +51,14 @@ Dev-dependencies
 * docutils
 * twine
 * setuptools
+
+Performance note
+----------------
+
+* BasePrinter - Use ``builtins.print``. Python has builtin unicode support after Python 3.6.0.
+* EchoPrinter - Call ``echo`` command to print unicode chars. Extreme slow.
+* TryPrinter - Print each chars separately and print a "?" for invalid char.
+* WinUnicodePrinter - Use win-unicode-console module.
 
 Changelog
 ---------
