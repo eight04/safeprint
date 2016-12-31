@@ -24,6 +24,5 @@ cute(
 	readme_build_err = ['readme_show', Exc()],
 	readme_show = 'start %temp%/ld.html',
 	readme = 'readme_build',
-	readme_post = 'readme_show',
-	version = 'echo {version}'
+	readme_post = 'readme_show'
 )
