@@ -4,15 +4,18 @@
 
 import os, re, sys, win_unicode_console.streams, builtins
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 def Printer():
+	if sys.version_info >= (3, 6, 0):
+		return NativePrinter()
+		
 	if (sys.platform == "win32"
 			and (not hasattr(win_unicode_console.streams, "STDOUT")
 			or win_unicode_console.streams.STDOUT.should_be_fixed())):
 		return WinUnicodePrinter()
-	else:
-		return BasePrinter()
+
+	return BasePrinter()
 
 class BasePrinter:
 	"""Create printer"""
@@ -71,5 +74,9 @@ class WinUnicodePrinter(BasePrinter):
 	def imp_print(self, text, end):
 		"""Use win_unicode_console"""
 		builtins.print(text, end=end, file=win_unicode_console.streams.stdout_text_transcoded)
+		
+class NativePrinter(BasePrinter):
+	def imp_print(self, text, end):
+		builtins.print(text, end=end)
 		
 print = Printer().print
