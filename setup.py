@@ -47,7 +47,7 @@ setup(
 	keywords = 'windows cmd unicode print',
 	packages = find_packages(),
 	install_requires = [
-		"win-unicode-console>=0.4"
+		"win-unicode-console >= 0.4; sys_platform == 'win32' and python_version < '3.6'"
 	],
 	entry_points = {
 		"console_scripts": [
