@@ -28,6 +28,7 @@ Hook callback:
 
 	import safeprint
 	
+	# create a printer
 	printer = safeprint.Printer()
 	
 	def callback(text):
@@ -36,6 +37,8 @@ Hook callback:
 	printer.add_listener(callback)
 	
 	printer.print(1, 2, 3, sep=", ")
+	
+	printer.remove_listener(callback)
 
 How it works
 ------------
