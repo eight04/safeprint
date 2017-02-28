@@ -1,17 +1,10 @@
 #! python3
 
-"""A setuptools based setup module.
-
-See:
-https://packaging.python.org/en/latest/distributing.html
-https://github.com/pypa/sampleproject
-"""
-
-# Always prefer setuptools over distutils
-from setuptools import setup, find_packages
-from os import path
-
 import re
+from os import path
+from io import open
+
+from setuptools import setup, find_packages
 
 here = path.abspath(path.dirname(__file__))
 
