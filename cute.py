@@ -6,7 +6,7 @@ cute(
 	pkg_name = "safeprint",
 	test = [
 		'py -3.5 -m pylint {pkg_name} setup.py cute.py',
-		['py -{v} test.py && py -{v} test.py > %temp%/safeprint-test.txt'
+		['py -{v} test.py && py -{v} test.py > %temp%/safeprint-test-{v}.txt'
 			.format(v=v) for v in (2, 3.5, 3.6)],
 		'readme_build'
 	],
