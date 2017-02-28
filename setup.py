@@ -34,7 +34,9 @@ setup(
 		"License :: OSI Approved :: MIT License",
 		"Natural Language :: Chinese (Traditional)",
 		"Operating System :: Microsoft :: Windows :: Windows 7",
+		"Programming Language :: Python :: 2.7",
 		"Programming Language :: Python :: 3.5",
+		"Programming Language :: Python :: 3.6",
 		"Topic :: Terminals"
 	],
 	keywords = 'windows cmd unicode print',
