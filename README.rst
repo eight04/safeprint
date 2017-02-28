@@ -48,19 +48,19 @@ Python 3
 
 * Printing to the console
 
-  Before printing, python encodes your text based on the encoding of your console. It is usally "utf-8" in Linux. Under Windows, you can check your default code page by cmd command ``chcp``.
+  Before printing, python encodes your text based on the encoding of your console, which is usally "utf-8" in Linux. Under Windows, you can check your default code page with cmd command ``chcp``.
   
   As the result, if python can't encode your text with the encoding, "UnicodeEncodeError" is raised. You can solve this by switching console encoding - run command ``chcp 65001`` to switch to utf-8 before running python.
   
-  What safeprint does, is to use `win-unicode-console <https://github.com/Drekin/win-unicode-console>`__. win-unicode-console uses WinAPI to write text to console.
+  What safeprint does, is to use `win-unicode-console <https://github.com/Drekin/win-unicode-console>`__, which uses WinAPI to write unicode string to the console.
   
-  Also, after python 3.6, `python has builtin support for that <https://docs.python.org/3/whatsnew/3.6.html#pep-528-change-windows-console-encoding-to-utf-8>`__.
+  Also, after python 3.6, `python has builtin support for that <https://docs.python.org/3/whatsnew/3.6.html#pep-528-change-windows-console-encoding-to-utf-8>`__, so you don't need win-unicode-console anymore.
   
 * Printing to a file (redirected output)
 
-  This cause "UnicodeEncodeError" because, python use your system code page as default encoding for stdios. To solve this, you should set environment variable "PYTHONIOENCODING" to "utf-8", which makes python use utf-8 as the encoding. (https://docs.python.org/3/using/cmdline.html#envvar-PYTHONIOENCODING)
+  This cause "UnicodeEncodeError" because python uses your system code page as default encoding for stdios. To solve it, you should set environment variable "PYTHONIOENCODING" to "utf-8", which makes python use utf-8 as the encoding. (https://docs.python.org/3/using/cmdline.html#envvar-PYTHONIOENCODING)
   
-  What safeprint does, is just always encode your text in utf-8, and write the bytes to stdout directly.
+  What safeprint does is just always encode your text in utf-8, and write the bytes to stdout directly.
   
 Python 2
 ~~~~~~~~
@@ -69,11 +69,11 @@ In python 2, there is no difference between bytes and str. An str is just a seri
 
 * Printing to the console
 
-  Since there is no difference between bytes and str, writing str to console is just writing bytes to console and will never raise an UnicodeEncodeError. However, you might get garbled if the encoding of the console doesn't match the encoding of the source code (and python 2 just doesn't work well with cp65001, switching code page might not work).
+  Since there is no difference between bytes and str, writing str to console is just writing bytes to console and will never raise an UnicodeEncodeError. However, you might get garbled if the encoding of the console doesn't match the encoding of the source code (and python 2 just doesn't work well with cp65001, switching code page doesn't work).
   
-  When printing unicode text, python will try to convert unicode into bytes with the encoding of the console, just like python 3, which might result in UnicodeEncodeError.
+  When printing unicode object, python will try to encode it into bytes with the encoding of the console like python 3, which might result in UnicodeEncodeError.
   
-  The solution is same as in python 3. safeprint use win-unicode-console to print unicode text.
+  The solution is same as in python 3. safeprint uses win-unicode-console to print unicode text.
 
 * Printing to a file (redirected output)
 
@@ -81,7 +81,7 @@ In python 2, there is no difference between bytes and str. An str is just a seri
 
   But, when printing an unicode object, python has to encode the unicode into bytes, based on the default encoding of python (you can check the default encoding by running this python script ``import sys; print(sys.getdefaultencoding())``, it defaults to "ascii" in python 2). As the result, the printing will fail with UnicodeEncodeError if python can't encode your unicode object.
   
-  To solve this, you can set the environment variable "PYTHONIOENCODING" just like python 3, or encode your unicode object with utf-8 before sending to the print function, which is what safeprint does.
+  To solve this, you can set the environment variable "PYTHONIOENCODING", or encode your unicode object with utf-8 before sending it to the print function, which is what safeprint does.
 
 Changelog
 ---------
