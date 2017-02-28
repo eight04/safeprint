@@ -50,7 +50,7 @@ Python 3
 
   Before printing, python encodes your text based on the encoding of your console. It is usally "utf-8" in Linux. Under Windows, you can check your default code page by cmd command ``chcp``.
   
-  As the result, if python can't encode your text with the encoding, "UnicodeEncodeError" is raised. You can solve this by swtiching console encoding - run command ``chcp 65001`` to switch to utf-8 before running python.
+  As the result, if python can't encode your text with the encoding, "UnicodeEncodeError" is raised. You can solve this by switching console encoding - run command ``chcp 65001`` to switch to utf-8 before running python.
   
   What safeprint does, is to use `win-unicode-console <https://github.com/Drekin/win-unicode-console>`__. win-unicode-console uses WinAPI to write text to console.
   
