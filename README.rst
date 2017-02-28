@@ -86,6 +86,11 @@ In python 2, there is no difference between bytes and str. An str is just a seri
 Changelog
 ---------
 
+* 0.2.0 (Feb 28, 2017)
+
+  - Support Python 2.
+  - Add printer for redirected output.
+
 * 0.1.4 (Dec 31, 2016)
 
   - Make win-unicode-console optional with Python 3.6.
