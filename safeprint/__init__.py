@@ -90,7 +90,6 @@ class EchoPrinter(BasePrinter):
 		for line in text.split("\n"):
 			line = re.sub(r"[\&<>|^]", self.escape, line)
 			command = ('echo:' + line).encode("UTF-16BE")
-			PRINT(str(0) in command)
 			os.system(command)
 
 	def escape(self, match):
