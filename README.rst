@@ -1,6 +1,10 @@
 safeprint
 =========
 
+.. image:: https://api.codacy.com/project/badge/Grade/ee5cace2710347a5987fbf56897780b3
+   :alt: Codacy Badge
+   :target: https://www.codacy.com/app/eight04/safeprint?utm_source=github.com&utm_medium=referral&utm_content=eight04/safeprint&utm_campaign=badger
+
 A printer suppressing UnicodeEncodeError.
 
 Installation
@@ -91,10 +95,11 @@ In python 2, there is no difference between bytes and str. An str is just a seri
 Changelog
 ---------
 
-* Next
+* 0.2.0 (Mar 1, 2017)
 
   - Support Python 2.
   - Add printer for redirected output.
+  - Drop EchoPrinter.
 
 * 0.1.4 (Dec 31, 2016)
 
