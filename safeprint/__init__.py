@@ -4,8 +4,6 @@
 
 from __future__ import print_function
 
-import os
-import re
 import sys
 
 __version__ = "0.1.4"
