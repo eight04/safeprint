@@ -39,6 +39,11 @@ Hook callback:
 	printer.print(1, 2, 3, sep=", ")
 	
 	printer.remove_listener(callback)
+	
+Note for python 2
+-----------------
+
+If you send a str object to the print function, safeprint will encode it into unicode object with utf-8 encoding.
 
 How it works
 ------------
