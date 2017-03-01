@@ -17,9 +17,18 @@ PY36 = sys.version_info >= (3, 6, 0)
 WIN32 = sys.platform == "win32"
 
 try:
-	STR = unicode
+	UNICODE = unicode
 except NameError:
-	STR = str
+	UNICODE = None
+
+def STR(o):
+	if UNICODE:
+		if isinstance(o, str):
+			o = UNICODE(o, "utf-8")
+		o = UNICODE(o)
+	else:
+		o = str(o)
+	return o
 
 try:
 	import win_unicode_console.streams
@@ -38,9 +47,6 @@ def Printer(): # pylint: disable=invalid-name
 
 		if WIN_UNICODE_CONSOLE and wuc_should_be_fixed():
 			return WinUnicodePrinter()
-
-		if not PY2:
-			return EchoPrinter()
 
 		return TryPrinter()
 
@@ -83,18 +89,6 @@ class BasePrinter:
 	def remove_listener(self, callback):
 		"""Unregister callback"""
 		self.listeners.remove(callback)
-
-class EchoPrinter(BasePrinter):
-	def imp_print(self, text, end):
-		"""Use windows echo"""
-		for line in text.split("\n"):
-			line = re.sub(r"[\&<>|^]", self.escape, line)
-			command = ('echo:' + line).encode("UTF-16BE")
-			os.system(command)
-
-	def escape(self, match):
-		"""Return escaped echo str."""
-		return "^" + match.group()
 
 class TryPrinter(BasePrinter):
 	def imp_print(self, text, end):
