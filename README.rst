@@ -1,6 +1,10 @@
 safeprint
 =========
 
+.. image:: https://api.codacy.com/project/badge/Grade/ee5cace2710347a5987fbf56897780b3
+   :alt: Codacy Badge
+   :target: https://www.codacy.com/app/eight04/safeprint?utm_source=github.com&utm_medium=referral&utm_content=eight04/safeprint&utm_campaign=badger
+
 A printer suppressing UnicodeEncodeError.
 
 Installation
